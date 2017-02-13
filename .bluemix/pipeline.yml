@@ -33,7 +33,7 @@ stages:
     script: |
       #!/bin/bash
       cf push "${CF_APP}"
-- name: BUILD
+- name: Build and Push Docker Image
   inputs:
   - type: job
     stage: Build
@@ -42,7 +42,7 @@ stages:
   triggers:
   - type: stage
   jobs:
-  - name: Build and Push Docker Image
+  - name: Build
     type: builder
     extension_id: ibm.devops.services.pipeline.container.builder
     target:
