@@ -14,7 +14,7 @@ sample-repo:
   service_id: githubpublic
   parameters:
     repo_name: "{{name}}"
-    repo_url: https://github.com/ssshah5/node-hello-world
+    repo_url: https://github.com/ssshah5/sample-app-registry
     type: clone
     has_issues: false
 
