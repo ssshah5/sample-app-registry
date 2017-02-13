@@ -1,0 +1,55 @@
+<project name="hello-world" default="dist">
+
+    <defaultexcludes add="**/.git*" />
+    <property name="docker.registry" value="registry.ng.bluemix.net"/>
+    <property name="docker.repository" value="dev_test/hello-world"/>
+    <property name="docker.tag" value="latest"/>
+    <property name="docker.image" value="${docker.registry}/${docker.repository}:${docker.tag}"/>
+    <property name="docker.no.cache" value="false"/>
+
+    <!-- ==================================================================
+     LOCATIONS OF BUILD ARTIFACTS
+     ================================================================== -->
+    <property name="project" value="${ant.project.name}"/>
+    <property name="dist.dir" location="dist" />
+    <property name="src.dir" location="." />
+
+    <!-- ==================================================================
+     DIST
+     ================================================================== -->
+
+    <target name="dist" depends="clean">
+        <property name="package.excludes" value="dist build.xml, Dockerfile, node-modules"/>
+        <delete file="${dist.dir}/${project}.tar.gz"/>
+        <tar destfile="${dist.dir}/${project}.tar.gz" compression="gzip" longfile="gnu">
+          <tarfileset dir="${src.dir}" prefix="${project}" excludes="${package.excludes}" />
+        </tar>
+    </target>
+
+
+<!-- ==================================================================
+   DOCKER
+   ================================================================== -->
+
+  <target name="docker" description="Builds the Docker image. Requires that 'dist' has already been run.">
+    <exec executable="docker" dir="${src.dir}" failonerror="true">
+      <arg value="build"/>
+      <arg value="--rm=true"/>
+      <arg value="--force-rm=true"/>
+      <arg value="--no-cache=${docker.no.cache}"/>
+      <arg value="-t"/>
+      <arg value="${docker.image}"/>
+      <arg value="."/>
+    </exec>
+  </target>
+
+    <!-- ==================================================================
+     OTHER
+     ================================================================== -->
+    <target name="clean">
+        <delete includeemptydirs="true" failonerror="false">
+          <fileset dir="${dist.dir}" includes="**/*" defaultexcludes="false"/>
+        </delete>
+    </target>
+
+</project>
