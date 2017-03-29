@@ -44,7 +44,6 @@ stages:
   properties:
   - name: NAMESPACE
     type: text
-    value: dev_test
   jobs:
   - name: Build
     type: builder
