@@ -1,8 +1,9 @@
 <project name="hello-world" default="dist">
 
     <defaultexcludes add="**/.git*" />
+    <property environment="env"/>
     <property name="docker.registry" value="registry.ng.bluemix.net"/>
-    <property name="docker.repository" value="dev_test/hello-world"/>
+    <property name="docker.repository" value="${env.NAMESPACE}/hello-world"/>
     <property name="docker.tag" value="latest"/>
     <property name="docker.image" value="${docker.registry}/${docker.repository}:${docker.tag}"/>
     <property name="docker.no.cache" value="false"/>
