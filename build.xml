@@ -3,7 +3,7 @@
     <defaultexcludes add="**/.git*" />
     <property environment="env"/>
     <property name="docker.registry" value="registry.ng.bluemix.net"/>
-    <property name="docker.repository" value="${env.REGISTRYNAMESPACE}/hello-world"/>
+    <property name="docker.repository" value="${env.BM_NAMESPACE}/hello-world"/>
     <property name="docker.tag" value="latest"/>
     <property name="docker.image" value="${docker.registry}/${docker.repository}:${docker.tag}"/>
     <property name="docker.no.cache" value="false"/>
