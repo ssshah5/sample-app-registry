@@ -29,7 +29,7 @@ stages:
       region_id: ${PROD_REGION_ID}
       organization: ${PROD_ORG_NAME}
       space: ${PROD_SPACE_NAME}
-      application: sample-registry-app
+      application: ${APP_NAME}
     script: |
       #!/bin/bash
       cf push "${CF_APP}"
