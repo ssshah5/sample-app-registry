@@ -41,6 +41,10 @@ stages:
     dir_name: null
   triggers:
   - type: stage
+  properties:
+  - name: NAMESPACE
+    type: text
+    value: dev_test
   jobs:
   - name: Build
     type: builder
